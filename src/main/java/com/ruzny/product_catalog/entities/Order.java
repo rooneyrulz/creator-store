@@ -2,12 +2,14 @@ package com.ruzny.product_catalog.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
@@ -36,6 +38,9 @@ public class Order {
     @NotBlank(message = "Customer email cannot be blank")
     @Column(name = "customer_email", nullable = false)
     private String customerEmail;
+
+    @OneToMany(mappedBy="order")
+    private List<OrderItem> orderItems;
 
     @Column(nullable = false)
     private String status;

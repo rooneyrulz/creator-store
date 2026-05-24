@@ -1,12 +1,16 @@
 package com.ruzny.product_catalog.entities;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
@@ -47,5 +51,7 @@ public class Product {
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
 
-    // TODO: Add relationships to other entities (e.g., Order, Review) if needed
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private List<OrderItem> orderItems;
 }
